@@ -28,6 +28,13 @@ public class TestController {
      *   with Basic Authorization with Client_id & secret
      */
 
+
+    /*
+    * Checking the token validity using following url
+    * http://localhost:8080/oauth/check_token?token=dRVUc4Ub9-o-rqahBBBIDcKXDlQ               (POST)
+    * with Basic Authorization with Client_id & secret
+    * */
+
     @GetMapping("/data")
     public String getStrig() {
         return "Security String";

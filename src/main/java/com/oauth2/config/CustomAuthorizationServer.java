@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
 @Configuration
 @EnableAuthorizationServer
@@ -40,7 +42,7 @@ public class CustomAuthorizationServer extends AuthorizationServerConfigurerAdap
             user's credential. From that screen authorization server issues auth_code(used as substitute of user's credential) which is used to generate the access_token.
              */
             .withClient("client_2").secret("secret2").scopes("read").authorizedGrantTypes("authorization_code", "refresh_token")
-            .redirectUris("https://localhost:8081")
+            .accessTokenValiditySeconds(8000).redirectUris("https://localhost:8081")
             .and()
             /*
              *  Grant_type : Client Credential
@@ -48,12 +50,21 @@ public class CustomAuthorizationServer extends AuthorizationServerConfigurerAdap
              * scopes can be anything here
              *
              */
-            .withClient("client_3").secret("secret3").scopes("XYZ__ABC").authorizedGrantTypes("client_credentials");
+            .withClient("client_3").secret("secret3").scopes("XYZ__ABC").authorizedGrantTypes("client_credentials")
+            .accessTokenValiditySeconds(8000);
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         //here we are configuring user qwerty with  client
         endpoints.authenticationManager(authenticationManager);
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        //This encoder is used for encoding the client_secret
+        security.passwordEncoder(NoOpPasswordEncoder.getInstance());
+        // /oauth/check_token doesn't allow every one to access the same so we have to enable it
+        security.checkTokenAccess("isAuthenticated()");
     }
 }
