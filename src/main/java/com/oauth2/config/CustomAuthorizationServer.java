@@ -39,7 +39,7 @@ public class CustomAuthorizationServer extends AuthorizationServerConfigurerAdap
             while when anybody uses signin with google, a new screen is opened by google's authorization server to provide credentials so that client app can not access
             user's credential. From that screen authorization server issues auth_code(used as substitute of user's credential) which is used to generate the access_token.
              */
-            .withClient("client_2").secret("secret2").scopes("read").authorizedGrantTypes("authorization_code")
+            .withClient("client_2").secret("secret2").scopes("read").authorizedGrantTypes("authorization_code","refresh_token")
             .redirectUris("https://localhost:8081");
     }
 
