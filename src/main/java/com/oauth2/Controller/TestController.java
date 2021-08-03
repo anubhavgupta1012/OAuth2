@@ -22,6 +22,11 @@ public class TestController {
      * with Basic Authorization with Clientid & secret
      * */
 
+    /*
+     *   Grant_type : Client_credentials
+     *   http://localhost:8080/oauth/token?grant_type=client_credentials&scope=XYZ__ABC          (POST)
+     *   with Basic Authorization with Client_id & secret
+     */
 
     @GetMapping("/data")
     public String getStrig() {
