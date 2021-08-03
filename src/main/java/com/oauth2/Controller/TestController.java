@@ -7,9 +7,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     /*
-    following endpoint with Basic Authorisation with Client & secret will give the access token
-    * http://localhost:8080/oauth/token?grant_type=password&scope=read&username=qwerty&password=qwerty  (POST)
-    */
+     * Grant_type = password
+     * following endpoint with Basic Authorisation with Client & secret will give the access token
+     * http://localhost:8080/oauth/token?grant_type=password&scope=read&username=qwerty&password=qwerty  (POST)
+     */
+
+
+    /*
+     * Grant_type : authorization-code
+     * to get the code for substituting the user's credential
+     * http://localhost:8080/oauth/authorize?response_type=code&client_id=client_2&scope=read     (GET)
+     *
+     *http://localhost:8080/oauth/token?grant_type=authorization_code&scope=read&code=v4ZXC-  (POST)
+     * with Basic Authorization with Clientid & secret
+     * */
+
 
     @GetMapping("/data")
     public String getStrig() {
