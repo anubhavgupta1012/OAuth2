@@ -37,7 +37,7 @@ public class CustomAuthorizationServer extends AuthorizationServerConfigurerAdap
             Grant_type : Authorization Code
             in grant_type = password, to generate access_token, we were providing user's credential (qwerty,qwerty) on the client side itself
             while when anybody uses signin with google, a new screen is opened by google's authorization server to provide credentials so that client app can not access
-            user's credential. From that screen authorization server issues a code(used as substitute of user's credential) which is used to generate the access.
+            user's credential. From that screen authorization server issues auth_code(used as substitute of user's credential) which is used to generate the access_token.
              */
             .withClient("client_2").secret("secret2").scopes("read").authorizedGrantTypes("authorization_code")
             .redirectUris("https://localhost:8081");

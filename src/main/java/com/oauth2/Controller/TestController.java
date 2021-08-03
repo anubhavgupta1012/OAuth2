@@ -15,7 +15,7 @@ public class TestController {
 
     /*
      * Grant_type : authorization-code
-     * to get the code for substituting the user's credential
+     * to get the auth_code for substituting the user's credential
      * http://localhost:8080/oauth/authorize?response_type=code&client_id=client_2&scope=read     (GET)
      *
      *http://localhost:8080/oauth/token?grant_type=authorization_code&scope=read&code=v4ZXC-  (POST)
