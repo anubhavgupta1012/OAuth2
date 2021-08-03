@@ -40,6 +40,7 @@ public class CustomAuthorizationServer extends AuthorizationServerConfigurerAdap
             user's credential. From that screen authorization server issues auth_code(used as substitute of user's credential) which is used to generate the access_token.
              */
             .withClient("client_2").secret("secret2").scopes("read").authorizedGrantTypes("authorization_code", "refresh_token")
+            .redirectUris("https://localhost:8081")
             .and()
             /*
              *  Grant_type : Client Credential
@@ -47,8 +48,7 @@ public class CustomAuthorizationServer extends AuthorizationServerConfigurerAdap
              * scopes can be anything here
              *
              */
-            .withClient("client_3").secret("secret3").scopes("XYZ__ABC").authorizedGrantTypes("client_credentials")
-            .redirectUris("https://localhost:8081");
+            .withClient("client_3").secret("secret3").scopes("XYZ__ABC").authorizedGrantTypes("client_credentials");
     }
 
     @Override
